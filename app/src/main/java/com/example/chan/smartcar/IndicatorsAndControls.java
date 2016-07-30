@@ -33,6 +33,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         switch_alarm.setOnClickListener(this);
         button_connect.setOnClickListener(this);
     }
+    String ip = "10.161.72.128";
 
     @Override
     public void onClick(View view) {
@@ -52,10 +53,14 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
             case R.id.button_connect:
                 //MQTT client
                 try {
-                    MqttClient mqttClient = new MqttClient("tcp://10.161.72.128:1883", "CHAN_LAMBORGHINI", new MemoryPersistence());
+                    MqttClient mqttClient = new MqttClient("tcp://" + ip + ":1883", "CHAN_LAMBORGHINI", new MemoryPersistence());
                     MqttConnectOptions options = new MqttConnectOptions();
                     options.setCleanSession(true);
                     mqttClient.connect(options);
+                    if (mqttClient.isConnected()){
+                        Button button = (Button)findViewById(R.id.button_connect);
+                        button.setText("Connected to " + ip);
+                    }
                     mqttClient.setCallback(new SubscribeCallback());
                     mqttClient.subscribe("debug");
 
