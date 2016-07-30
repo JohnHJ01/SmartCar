@@ -56,6 +56,8 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                     MqttConnectOptions options = new MqttConnectOptions();
                     options.setCleanSession(true);
                     mqttClient.connect(options);
+                    mqttClient.setCallback(new SubscribeCallback());
+                    mqttClient.subscribe("debug");
 
                 } catch (MqttException e) {
                     e.printStackTrace();
