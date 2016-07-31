@@ -10,6 +10,7 @@ import android.widget.TextView;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class IndicatorsAndControls extends AppCompatActivity implements View.OnClickListener{
@@ -22,6 +23,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         Switch switch_headlights = (Switch)findViewById(R.id.switch_headlights);
         Switch switch_doorlocks = (Switch)findViewById(R.id.switch_doorlocks);
         Switch switch_alarm = (Switch)findViewById(R.id.switch_alarm);
+
         Button button_connect = (Button) findViewById(R.id.button_connect);
 
         TextView textview_headlights = (TextView)findViewById(R.id.textView_headlights);
@@ -33,7 +35,10 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         switch_alarm.setOnClickListener(this);
         button_connect.setOnClickListener(this);
     }
-    String ip = "10.161.72.128";
+
+    //    String ip = "10.161.72.128";
+//    String ip = "192.168.1.10";
+    String ip = "test.mosquitto.org";
 
     @Override
     public void onClick(View view) {
@@ -61,8 +66,15 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                         Button button = (Button)findViewById(R.id.button_connect);
                         button.setText("Connected to " + ip);
                     }
-                    mqttClient.setCallback(new SubscribeCallback());
+                    //get initial status from myRIO
+                    mqttClient.setCallback(new SubscribeCallback(this));
                     mqttClient.subscribe("debug");
+                    mqttClient.subscribe("headlights/status");
+                    mqttClient.publish("headlights/status", new MqttMessage("getStatus".getBytes()));
+                    mqttClient.subscribe("doorlocks/status");
+                    mqttClient.publish("doorlocks/status", new MqttMessage("getStatus".getBytes()));
+                    mqttClient.subscribe("alarm/status");
+                    mqttClient.publish("alarm/status", new MqttMessage("getStatus".getBytes()));
 
                 } catch (MqttException e) {
                     e.printStackTrace();
