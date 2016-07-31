@@ -38,7 +38,7 @@ public class SubscribeCallback implements MqttCallback {
                         @Override
                         public void run() {
                             Switch switch_headlights = (Switch) ((Activity) context).findViewById(R.id.switch_headlights);
-                            IndicatorsAndControls.changeSwitchState(switch_headlights);
+                            switch_headlights.setChecked(true);
                         }
                     });
                 }
