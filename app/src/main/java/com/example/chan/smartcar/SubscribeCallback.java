@@ -43,6 +43,28 @@ public class SubscribeCallback implements MqttCallback {
                     });
                 }
                 break;
+            case "doorlocks/status":
+                if (mqttMessage.toString().equals("ON")) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Switch switch_doorlocks = (Switch) ((Activity) context).findViewById(R.id.switch_doorlocks);
+                            switch_doorlocks.setChecked(true);
+                        }
+                    });
+                }
+                break;
+            case "alarm/status":
+                if (mqttMessage.toString().equals("ON")) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Switch switch_alarm = (Switch) ((Activity) context).findViewById(R.id.switch_alarm);
+                            switch_alarm.setChecked(true);
+                        }
+                    });
+                }
+                break;
         }
     }
 

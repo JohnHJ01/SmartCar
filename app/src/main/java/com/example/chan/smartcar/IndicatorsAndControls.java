@@ -19,6 +19,8 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indicators_and_controls);
 
+        // TODO: 31/7/2016 Check Wifi connection before trying to connect. Shows prompting box to enable Wifi as in BT Terminal app
+
         //create all switches and textviews and register OnClickListener
         Switch switch_headlights = (Switch)findViewById(R.id.switch_headlights);
         Switch switch_doorlocks = (Switch)findViewById(R.id.switch_doorlocks);
