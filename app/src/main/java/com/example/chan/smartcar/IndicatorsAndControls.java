@@ -41,6 +41,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
     //    String ip = "10.161.72.128";
 //    String ip = "192.168.1.10";
     String ip = "test.mosquitto.org";
+    MqttClient mqttClient;
 
     @Override
     public void onClick(View view) {
@@ -48,6 +49,18 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
             case R.id.switch_headlights:
                 TextView textview1 = (TextView)findViewById(R.id.textView_headlights);
                 textview1.setText("Headlights clicked!");
+                Switch switch_headlights = (Switch) view;
+
+                if (switch_headlights.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
+                    try {
+                        mqttClient.publish("headlights/control", new MqttMessage("turnON".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                }
+
                 break;
             case R.id.switch_doorlocks:
                 TextView textview2= (TextView)findViewById(R.id.textView_doorlocks);
@@ -60,7 +73,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
             case R.id.button_connect:
                 //MQTT client
                 try {
-                    MqttClient mqttClient = new MqttClient("tcp://" + ip + ":1883", "CHAN_LAMBORGHINI", new MemoryPersistence());
+                    mqttClient = new MqttClient("tcp://" + ip + ":1883", "CHAN_LAMBORGHINI", new MemoryPersistence());
                     MqttConnectOptions options = new MqttConnectOptions();
                     options.setCleanSession(true);
                     mqttClient.connect(options);
@@ -70,7 +83,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                     }
                     //get initial status from myRIO
                     mqttClient.setCallback(new SubscribeCallback(this));
-                    mqttClient.subscribe("debug");
                     mqttClient.subscribe("headlights/status");
                     mqttClient.publish("headlights/status", new MqttMessage("getStatus".getBytes()));
                     mqttClient.subscribe("doorlocks/status");
