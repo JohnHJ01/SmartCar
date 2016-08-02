@@ -51,14 +51,12 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            // TODO: 2/8/2016 Aircond and alarm send command. Flood alarm.
-            // TODO: 1/8/2016 Air_cond and Flood Alarm. Floor Alarm is passive, textview maybe? Separate doorlocks to left and right
-                        
+            // TODO: 2/8/2016 Flood alarm.
+
             case R.id.switch_headlights:
                 TextView textview1 = (TextView)findViewById(R.id.textView_headlights);
                 textview1.setText("Headlights clicked!");
                 Switch switch_headlights = (Switch) view;
-
                 if (switch_headlights.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
                         mqttClient.publish("headlights/control", new MqttMessage("turnON".getBytes()));
@@ -67,20 +65,84 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                     }
 
                 } else {
+                    try {
+                        mqttClient.publish("headlights/control", new MqttMessage("turnOFF".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
                 }
-
                 break;
             case R.id.switch_leftdoor:
                 TextView textview2 = (TextView) findViewById(R.id.textView_leftdoor);
                 textview2.setText("leftdoor clicked!");
+                Switch switch_leftdoor = (Switch) view;
+                if (switch_leftdoor.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
+                    try {
+                        mqttClient.publish("leftdoor/control", new MqttMessage("turnON".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        mqttClient.publish("leftdoor/control", new MqttMessage("turnOFF".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.switch_rightdoor:
                 TextView textview3 = (TextView) findViewById(R.id.textView_rightdoor);
                 textview3.setText("rightdoor clicked!");
+                Switch switch_rightdoor = (Switch) view;
+                if (switch_rightdoor.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
+                    try {
+                        mqttClient.publish("rightdoor/control", new MqttMessage("turnON".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        mqttClient.publish("rightdoor/control", new MqttMessage("turnOFF".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.switch_aircond:
+                Switch switch_aircond = (Switch) view;
+                if (switch_aircond.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
+                    try {
+                        mqttClient.publish("aircond/control", new MqttMessage("turnON".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        mqttClient.publish("aircond/control", new MqttMessage("turnOFF".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.switch_alarm:
+                Switch switch_alarm = (Switch) view;
+                if (switch_alarm.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
+                    try {
+                        mqttClient.publish("alarm/control", new MqttMessage("turnON".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        mqttClient.publish("alarm/control", new MqttMessage("turnOFF".getBytes()));
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case R.id.button_connect:
                 //MQTT client
