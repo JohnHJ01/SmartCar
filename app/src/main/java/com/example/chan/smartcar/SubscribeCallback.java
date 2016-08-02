@@ -2,10 +2,8 @@ package com.example.chan.smartcar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.widget.Button;
+
 import android.widget.Switch;
-import android.widget.TextView;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -43,13 +41,35 @@ public class SubscribeCallback implements MqttCallback {
                     });
                 }
                 break;
-            case "doorlocks/status":
+            case "leftdoor/status":
                 if (mqttMessage.toString().equals("ON")) {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Switch switch_doorlocks = (Switch) ((Activity) context).findViewById(R.id.switch_doorlocks);
-                            switch_doorlocks.setChecked(true);
+                            Switch switch_leftdoor = (Switch) ((Activity) context).findViewById(R.id.switch_leftdoor);
+                            switch_leftdoor.setChecked(true);
+                        }
+                    });
+                }
+                break;
+            case "rightdoor/status":
+                if (mqttMessage.toString().equals("ON")) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Switch switch_rightdoor = (Switch) ((Activity) context).findViewById(R.id.switch_rightdoor);
+                            switch_rightdoor.setChecked(true);
+                        }
+                    });
+                }
+                break;
+            case "aircond/status":
+                if (mqttMessage.toString().equals("ON")) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Switch switch_aircond = (Switch) ((Activity) context).findViewById(R.id.switch_aircond);
+                            switch_aircond.setChecked(true);
                         }
                     });
                 }

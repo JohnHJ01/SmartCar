@@ -37,8 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DoorLocks"
-        android:id="@+id/textView_doorlocks"
+        android:text="Left Door"
+        android:id="@+id/textView_leftdoor"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/switch_headlights"
         android:layout_alignLeft="@+id/textView_headlights"
@@ -47,9 +47,9 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch_doorlocks"
+        android:id="@+id/switch_leftdoor"
         android:checked="false"
-        android:layout_alignTop="@+id/textView_doorlocks"
+        android:layout_alignTop="@+id/textView_leftdoor"
         android:layout_alignLeft="@+id/switch_headlights"
         android:layout_alignStart="@+id/switch_headlights" />
 
@@ -57,21 +57,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Alarm"
-        android:id="@+id/textView_alarm"
+        android:text="Right Door"
+        android:id="@+id/textView_rightdoor"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/switch_doorlocks"
-        android:layout_alignLeft="@+id/textView_doorlocks"
-        android:layout_alignStart="@+id/textView_doorlocks" />
+        android:layout_below="@+id/switch_leftdoor"
+        android:layout_alignLeft="@+id/textView_leftdoor"
+        android:layout_alignStart="@+id/textView_leftdoor" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch_alarm"
+        android:id="@+id/switch_rightdoor"
         android:checked="false"
-        android:layout_alignTop="@+id/textView_alarm"
-        android:layout_alignLeft="@+id/switch_doorlocks"
-        android:layout_alignStart="@+id/switch_doorlocks" />
+        android:layout_alignTop="@+id/textView_rightdoor"
+        android:layout_alignLeft="@+id/switch_leftdoor"
+        android:layout_alignStart="@+id/switch_leftdoor" />
 
     <Button
         android:layout_width="wrap_content"
@@ -82,6 +82,47 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Air Conditioner"
+        android:id="@+id/textView_aircond"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/switch_rightdoor"
+        android:layout_alignLeft="@+id/textView_rightdoor"
+        android:layout_alignStart="@+id/textView_rightdoor" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_aircond"
+        android:checked="false"
+        android:layout_alignTop="@+id/textView_aircond"
+        android:layout_alignLeft="@+id/switch_rightdoor"
+        android:layout_alignStart="@+id/switch_rightdoor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Alarm"
+        android:id="@+id/textView_alarm"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/switch_aircond"
+        android:layout_alignLeft="@+id/textView_aircond"
+        android:layout_alignStart="@+id/textView_aircond" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_alarm"
+        android:checked="false"
+        android:layout_alignTop="@+id/textView_alarm"
+        android:layout_alignLeft="@+id/switch_aircond"
+        android:layout_alignStart="@+id/switch_aircond" />
 
 </RelativeLayout>

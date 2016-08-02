@@ -23,17 +23,22 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
         //create all switches and textviews and register OnClickListener
         Switch switch_headlights = (Switch)findViewById(R.id.switch_headlights);
-        Switch switch_doorlocks = (Switch)findViewById(R.id.switch_doorlocks);
+        Switch switch_leftdoor = (Switch) findViewById(R.id.switch_leftdoor);
+        Switch switch_rightdoor = (Switch) findViewById(R.id.switch_rightdoor);
+        Switch switch_aircond = (Switch) findViewById(R.id.switch_aircond);
         Switch switch_alarm = (Switch)findViewById(R.id.switch_alarm);
+
 
         Button button_connect = (Button) findViewById(R.id.button_connect);
 
         TextView textview_headlights = (TextView)findViewById(R.id.textView_headlights);
-        TextView textview_doorlocks = (TextView)findViewById(R.id.textView_doorlocks);
-        TextView textview_alarm = (TextView)findViewById(R.id.textView_alarm);
+        TextView textview_doorlocks = (TextView) findViewById(R.id.textView_leftdoor);
+        TextView textview_alarm = (TextView) findViewById(R.id.textView_rightdoor);
 
         switch_headlights.setOnClickListener(this); //this acitivity is an OnClickListener itself
-        switch_doorlocks.setOnClickListener(this);
+        switch_leftdoor.setOnClickListener(this);
+        switch_rightdoor.setOnClickListener(this);
+        switch_aircond.setOnClickListener(this);
         switch_alarm.setOnClickListener(this);
         button_connect.setOnClickListener(this);
     }
@@ -46,6 +51,9 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            // TODO: 2/8/2016 Aircond and alarm send command. Flood alarm.
+            // TODO: 1/8/2016 Air_cond and Flood Alarm. Floor Alarm is passive, textview maybe? Separate doorlocks to left and right
+                        
             case R.id.switch_headlights:
                 TextView textview1 = (TextView)findViewById(R.id.textView_headlights);
                 textview1.setText("Headlights clicked!");
@@ -62,17 +70,22 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 }
 
                 break;
-            case R.id.switch_doorlocks:
-                TextView textview2= (TextView)findViewById(R.id.textView_doorlocks);
-                textview2.setText("Doorlocks clicked!");
+            case R.id.switch_leftdoor:
+                TextView textview2 = (TextView) findViewById(R.id.textView_leftdoor);
+                textview2.setText("leftdoor clicked!");
+                break;
+            case R.id.switch_rightdoor:
+                TextView textview3 = (TextView) findViewById(R.id.textView_rightdoor);
+                textview3.setText("rightdoor clicked!");
+                break;
+            case R.id.switch_aircond:
                 break;
             case R.id.switch_alarm:
-                TextView textview3 = (TextView)findViewById(R.id.textView_alarm);
-                textview3.setText("Alarm clicked!");
                 break;
             case R.id.button_connect:
                 //MQTT client
                 try {
+                    // TODO: 1/8/2016 Id and Password Login Page
                     mqttClient = new MqttClient("tcp://" + ip + ":1883", "CHAN_LAMBORGHINI", new MemoryPersistence());
                     MqttConnectOptions options = new MqttConnectOptions();
                     options.setCleanSession(true);
@@ -85,11 +98,16 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                     mqttClient.setCallback(new SubscribeCallback(this));
                     mqttClient.subscribe("headlights/status");
                     mqttClient.publish("headlights/status", new MqttMessage("getStatus".getBytes()));
-                    mqttClient.subscribe("doorlocks/status");
-                    mqttClient.publish("doorlocks/status", new MqttMessage("getStatus".getBytes()));
+                    mqttClient.subscribe("leftdoor/status");
+                    mqttClient.publish("leftdoor/status", new MqttMessage("getStatus".getBytes()));
+                    mqttClient.subscribe("rightdoor/status");
+                    mqttClient.publish("rightdoor/status", new MqttMessage("getStatus".getBytes()));
+                    mqttClient.subscribe("aircond/status");
+                    mqttClient.publish("aircond/status", new MqttMessage("getStatus".getBytes()));
                     mqttClient.subscribe("alarm/status");
                     mqttClient.publish("alarm/status", new MqttMessage("getStatus".getBytes()));
-
+                    mqttClient.subscribe("flooadalarm/status");
+                    mqttClient.publish("floodalarm/status", new MqttMessage("getStatus".getBytes()));
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
