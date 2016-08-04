@@ -3,6 +3,7 @@ package com.example.chan.smartcar;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -117,11 +118,9 @@ public class SubscribeCallback implements MqttCallback {
                         public void run() {
                             Switch switch_alarm = (Switch) ((Activity) context).findViewById(R.id.switch_alarm);
                             switch_alarm.setChecked(true);
-                            Toast.makeText(context, "ALARM is RINGING!!!", Toast.LENGTH_SHORT).show();
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                            Ringtone r = RingtoneManager.getRingtone(context, notification);
-                            r.play();
-                            // TODO: 2/8/2016 Add a stop function to stop the ALARM LOL 
+                            Toast.makeText(context, "ALARM is RINGING!!!", Toast.LENGTH_SHORT).show();//
+                            Intent startIntent = new Intent(context, RingtonePlayingService.class);
+                            context.startService(startIntent);
                         }
                     });
                 } else {
@@ -130,7 +129,8 @@ public class SubscribeCallback implements MqttCallback {
                         public void run() {
                             Switch switch_alarm = (Switch) ((Activity) context).findViewById(R.id.switch_alarm);
                             switch_alarm.setChecked(false);
-
+                            Intent i = new Intent(context, RingtonePlayingService.class);
+                            context.stopService(i);
                         }
                     });
                 }
