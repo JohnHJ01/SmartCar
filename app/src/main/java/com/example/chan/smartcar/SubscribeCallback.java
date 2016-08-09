@@ -1,8 +1,10 @@
 package com.example.chan.smartcar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -135,6 +137,37 @@ public class SubscribeCallback implements MqttCallback {
                     });
                 }
                 break;
+            case "floodalarm/status":
+                if (mqttMessage.toString().equals("ON")) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "Your car is flooded!!!", Toast.LENGTH_SHORT).show();//
+                            Intent startIntent = new Intent(context, RingtonePlayingService.class);
+                            context.startService(startIntent);
+                            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                            alertDialog.setTitle("Flood Alert");
+                            alertDialog.setMessage("Please move your car to a safe position.");
+                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK, I will.",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent i = new Intent(context, RingtonePlayingService.class);
+                                            context.stopService(i);
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
+                    });
+                } else {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(context, RingtonePlayingService.class);
+                            context.stopService(i);
+                        }
+                    });
+                }
         }
     }
 

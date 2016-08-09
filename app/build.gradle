@@ -24,4 +24,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile files('libs/org.eclipse.paho.android.service-1.1.0.jar')
+    compile files('libs/eventbus-3.0.0-beta1.jar')
 }
