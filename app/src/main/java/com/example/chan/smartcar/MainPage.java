@@ -45,7 +45,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                     Intent intent = new Intent(this, IndicatorsAndControls.class);
                     EventBus.getDefault().postSticky(mqttClient);
                     startActivity(intent);
-
                 }
             } catch (MqttException e) {
                 e.printStackTrace();

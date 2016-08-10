@@ -15,11 +15,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="HeadLights"
         android:id="@+id/textView_headlights"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp" />
+        android:layout_toEndOf="@+id/imageView" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -36,7 +37,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Left Door"
         android:id="@+id/textView_leftdoor"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/switch_headlights"
         android:layout_alignLeft="@+id/textView_headlights"
         android:layout_alignStart="@+id/textView_headlights" />
@@ -56,7 +57,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Right Door"
         android:id="@+id/textView_rightdoor"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/switch_leftdoor"
         android:layout_alignLeft="@+id/textView_leftdoor"
         android:layout_alignStart="@+id/textView_leftdoor" />
@@ -76,10 +77,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Air Conditioner"
         android:id="@+id/textView_aircond"
-        android:layout_marginTop="50dp"
         android:layout_below="@+id/switch_rightdoor"
         android:layout_alignLeft="@+id/textView_rightdoor"
-        android:layout_alignStart="@+id/textView_rightdoor" />
+        android:layout_alignStart="@+id/textView_rightdoor"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -96,10 +99,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Alarm"
         android:id="@+id/textView_alarm"
-        android:layout_marginTop="50dp"
         android:layout_below="@+id/switch_aircond"
         android:layout_alignLeft="@+id/textView_aircond"
-        android:layout_alignStart="@+id/textView_aircond" />
+        android:layout_alignStart="@+id/textView_aircond"
+        android:layout_marginTop="30dp" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -133,8 +136,7 @@
         android:fitsSystemWindows="false"
         android:scaleType="fitXY"
         android:maxWidth="40dp"
-        android:layout_marginBottom="43dp"
-        android:layout_above="@+id/switch_rightdoor"
+        android:layout_alignBottom="@+id/switch_leftdoor"
         android:layout_toLeftOf="@+id/textView_headlights"
         android:layout_toStartOf="@+id/textView_headlights" />
 
@@ -147,10 +149,10 @@
         android:fitsSystemWindows="false"
         android:scaleType="fitXY"
         android:maxWidth="40dp"
-        android:layout_below="@+id/switch_leftdoor"
+        android:layout_above="@+id/imageView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp" />
+        android:layout_marginBottom="23dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -161,10 +163,10 @@
         android:fitsSystemWindows="false"
         android:scaleType="fitXY"
         android:maxWidth="40dp"
-        android:layout_below="@+id/imageView3"
-        android:layout_toLeftOf="@+id/textView_headlights"
-        android:layout_toStartOf="@+id/textView_headlights"
-        android:layout_marginTop="39dp" />
+        android:layout_above="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp" />
 
     <ImageView
         android:layout_width="wrap_content"

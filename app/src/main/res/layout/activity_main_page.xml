@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Connect"
         android:id="@+id/button_connect"
-        android:layout_marginTop="36dp"
-        android:layout_below="@+id/editText_IP"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -24,11 +23,9 @@
         android:id="@+id/editText_IP"
         android:hint="IP"
         android:text="test.mosquitto.org"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp" />
+        android:layout_below="@+id/editText.password"
+        android:layout_toRightOf="@+id/textView_IP"
+        android:layout_toEndOf="@+id/textView_IP" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,21 +33,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Broker IP : "
         android:id="@+id/textView_IP"
-        android:layout_centerVertical="true"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp"
+        android:layout_alignBaseline="@+id/editText_IP"
+        android:layout_alignBottom="@+id/editText_IP"
         android:layout_toLeftOf="@+id/button_connect"
         android:layout_toStartOf="@+id/button_connect" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText.username"
         android:hint="Enter username"
+        android:layout_marginTop="48dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
-        android:layout_alignLeft="@+id/textView_IP"
-        android:layout_alignStart="@+id/textView_IP"
-        android:layout_alignRight="@+id/editText_IP"
-        android:layout_alignEnd="@+id/editText_IP" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
