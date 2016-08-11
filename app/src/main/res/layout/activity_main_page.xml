@@ -68,4 +68,13 @@
         android:layout_alignRight="@+id/editText.username"
         android:layout_alignEnd="@+id/editText.username" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/abc_text_size_display_4_material"
+        android:id="@+id/imageView6"
+        android:src="@drawable/logo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
