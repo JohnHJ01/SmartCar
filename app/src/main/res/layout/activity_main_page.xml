@@ -9,12 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.chan.smartcar.MainPage">
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Connect"
         android:id="@+id/button_connect"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="65dp"
+        android:layout_below="@+id/editText_IP"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -23,9 +25,12 @@
         android:id="@+id/editText_IP"
         android:hint="IP"
         android:text="test.mosquitto.org"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
         android:layout_below="@+id/editText.password"
-        android:layout_toRightOf="@+id/textView_IP"
-        android:layout_toEndOf="@+id/textView_IP" />
+        android:layout_alignLeft="@+id/button_connect"
+        android:layout_alignStart="@+id/button_connect"
+        android:layout_marginTop="22dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,12 +38,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Broker IP : "
         android:id="@+id/textView_IP"
-        android:layout_marginRight="23dp"
-        android:layout_marginEnd="23dp"
-        android:layout_alignBaseline="@+id/editText_IP"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_alignBottom="@+id/editText_IP"
         android:layout_toLeftOf="@+id/button_connect"
-        android:layout_toStartOf="@+id/button_connect" />
+        android:layout_toStartOf="@+id/button_connect"
+        android:layout_marginBottom="6dp" />
 
     <EditText
         android:layout_width="fill_parent"

@@ -25,29 +25,21 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indicators_and_controls);
 
-        // TODO: 31/7/2016 Check Wifi connection before trying to connect. Shows prompting box to enable Wifi as in BT Terminal app
-
         mqttClient = EventBus.getDefault().removeStickyEvent(MqttClient.class);
         mqttClient.setCallback(new SubscribeCallback(this));
         try {
             mqttClient.subscribe("headlights/status");
-//            mqttClient.publish("headlights/status", new MqttMessage("getStatus".getBytes()));
             mqttClient.publish("headlights/status", "getStatus".getBytes(), qos, retained);
             mqttClient.subscribe("leftdoor/status");
-//            mqttClient.publish("leftdoor/status", new MqttMessage("getStatus".getBytes()));
             mqttClient.publish("leftdoor/status", "getStatus".getBytes(), qos, retained);
             mqttClient.subscribe("rightdoor/status");
-//            mqttClient.publish("rightdoor/status", new MqttMessage("getStatus".getBytes()));
             mqttClient.publish("rightdoor/status", "getStatus".getBytes(), qos, retained);
             mqttClient.subscribe("aircond/status");
-//            mqttClient.publish("aircond/status", new MqttMessage("getStatus".getBytes()));
             mqttClient.publish("aircond/status", "getStatus".getBytes(), qos, retained);
             mqttClient.subscribe("alarm/status");
-//            mqttClient.publish("alarm/status", new MqttMessage("getStatus".getBytes()));
             mqttClient.publish("alarm/status", "getStatus".getBytes(), qos, retained);
             mqttClient.subscribe("floodalarm/status");
-//            mqttClient.publish("floodalarm/status", new MqttMessage("getStatus".getBytes()));
-            mqttClient.publish("floodalarm/status", "getStatus".getBytes(), qos, retained);
+            mqttClient.publish("floodalarm/status", "getStatus".getBytes(), qos, retained); //Subscribe and get the status of the car
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -59,7 +51,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
         Switch switch_aircond = (Switch) findViewById(R.id.switch_aircond);
         Switch switch_alarm = (Switch)findViewById(R.id.switch_alarm);
 
-        switch_headlights.setOnClickListener(this); //this acitivity is an OnClickListener itself
+        switch_headlights.setOnClickListener(this); //this activity is an OnClickListener itself
         switch_leftdoor.setOnClickListener(this);
         switch_rightdoor.setOnClickListener(this);
         switch_aircond.setOnClickListener(this);
@@ -73,7 +65,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 Switch switch_headlights = (Switch) view;
                 if (switch_headlights.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
-//                        mqttClient.publish("headlights/control", new MqttMessage("turnON".getBytes()), qos, false);
                         mqttClient.publish("headlights/control", "turnON".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -81,8 +72,7 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
                 } else {
                     try {
-//                        mqttClient.publish("headlights/control", new MqttMessage("turnOFF".getBytes()));
-                        mqttClient.publish("headlights/control", "turnOFF".getBytes(), qos, retained);
+                        mqttClient.publish("headlights/control", "turnOFF".getBytes(), qos, retained); //if not, turn it off
                     } catch (MqttException e) {
                         e.printStackTrace();
                     }
@@ -92,7 +82,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 Switch switch_leftdoor = (Switch) view;
                 if (switch_leftdoor.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
-//                        mqttClient.publish("leftdoor/control", new MqttMessage("turnON".getBytes()));
                         mqttClient.publish("leftdoor/control", "turnON".getBytes(), qos, retained);
 
                     } catch (MqttException e) {
@@ -101,7 +90,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
                 } else {
                     try {
-//                        mqttClient.publish("leftdoor/control", new MqttMessage("turnOFF".getBytes()));
                         mqttClient.publish("leftdoor/control", "turnOFF".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -112,7 +100,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 Switch switch_rightdoor = (Switch) view;
                 if (switch_rightdoor.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
-//                        mqttClient.publish("rightdoor/control", new MqttMessage("turnON".getBytes()));
                         mqttClient.publish("rightdoor/control", "turnON".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -120,7 +107,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
                 } else {
                     try {
-//                        mqttClient.publish("rightdoor/control", new MqttMessage("turnOFF".getBytes()));
                         mqttClient.publish("rightdoor/control", "turnOFF".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -131,7 +117,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 Switch switch_aircond = (Switch) view;
                 if (switch_aircond.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
-//                        mqttClient.publish("aircond/control", new MqttMessage("turnON".getBytes()));
                         mqttClient.publish("aircond/control", "turnON".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -139,7 +124,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
                 } else {
                     try {
-//                        mqttClient.publish("aircond/control", new MqttMessage("turnOFF".getBytes()));
                         mqttClient.publish("aircond/control", "turnOFF".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -150,7 +134,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
                 Switch switch_alarm = (Switch) view;
                 if (switch_alarm.isChecked()) { //check the state of the switch, if it's in ON state(caused by a click), send a command to turn on
                     try {
-//                        mqttClient.publish("alarm/control", new MqttMessage("turnON".getBytes()));
                         mqttClient.publish("alarm/control", "turnON".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();
@@ -158,7 +141,6 @@ public class IndicatorsAndControls extends AppCompatActivity implements View.OnC
 
                 } else {
                     try {
-//                        mqttClient.publish("alarm/control", new MqttMessage("turnOFF".getBytes()));
                         mqttClient.publish("alarm/control", "turnOFF".getBytes(), qos, retained);
                     } catch (MqttException e) {
                         e.printStackTrace();

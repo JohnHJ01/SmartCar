@@ -19,7 +19,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 /**
  * Created by hachan on 30/7/2016.
  * Logics for message received.
- * Switch Case logic.
+ * Switch Case logic for every topics and messages.
  */
 public class SubscribeCallback implements MqttCallback {
     public Context context;

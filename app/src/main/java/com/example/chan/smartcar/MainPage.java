@@ -1,6 +1,10 @@
 package com.example.chan.smartcar;
+//Latest and most updated code is available on https://github.com/JohnHJ01/SmartCar
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,11 +44,11 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 mqttClient = new MqttClient("tcp://" + ip + ":1883", "NI_LAMBORGHINI", new MemoryPersistence());
                 MqttConnectOptions options = new MqttConnectOptions();
                 options.setCleanSession(true);
-                mqttClient.connect(options);
+                mqttClient.connect(options); //create a new MQTT client and make a connection
                 if (mqttClient.isConnected()) {
                     Intent intent = new Intent(this, IndicatorsAndControls.class);
                     EventBus.getDefault().postSticky(mqttClient);
-                    startActivity(intent);
+                    startActivity(intent); //Start IndicatorsAndControls Activity
                 }
             } catch (MqttException e) {
                 e.printStackTrace();
